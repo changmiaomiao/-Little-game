@@ -150,17 +150,14 @@ var render = (function () {
             fn.off(this, "mousemove", move);
             fn.off(this, "mouseup", up);
         }
-        if(this.flag){
             this.left-=this.x;
             this.top-=this.y;
             if(this.left>100){
                 this.style.left=this.l+240+"px";
                 this.style.top =this.t+"px";
-                return ;
             }else if(this.left<-100){
                 this.style.left=this.l-240+"px";
                 this.style.top =this.t+"px";
-                return ;
             }else{
                 if(this.top>100){
                     this.style.top=this.t+170+"px";
@@ -173,10 +170,6 @@ var render = (function () {
                     this.style.top=this.t+"px";
                 }
             }
-        }else{
-            this.style.left =this.l+"px";
-            this.style.top=this.t+"px";
-        };
 
     }
     return {
