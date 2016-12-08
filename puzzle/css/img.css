@@ -137,6 +137,7 @@ img{
     top: 340px;
     left:240px;
 }
+
 .main .contents .conImg9 span.pos0{
     top:0;
     left:0;
@@ -168,4 +169,9 @@ img{
 .main .contents .conImg9 span.pos7{
     top: 340px;
     left:240px;
+}
+#pos{
+    background: none;
+    top: 340px;
+    left:480px;
 }
