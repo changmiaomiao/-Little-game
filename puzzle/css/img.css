@@ -54,24 +54,23 @@ img{
     background-color: palevioletred;
 }
 .main .list li.input{
-    width: 50%;
+    position: relative;
+    width: 25%;
     /*text-align: center;*/
 }
 .main .list li.input input{
-    float: left;
+    position: absolute;
+    top:0;
+    left: 0;
     color: white;
+    opacity: 0;
+    width: 100%;
     font-size: 20px;
     border: none;
     height: 36px;
     line-height: 36px;
     vertical-align: bottom;
     background-color: palevioletred;
-}
-.main .list li.input input[type=file]{
-    width: 70%;
-}
-.main .list li.input input[type=button]{
-    width: 30%;
 }
 .main .contents .sample{
     position: relative;
@@ -84,93 +83,95 @@ img{
     width: 100%;
     height: 100%;
 }
-.main .contents .conImg span{
+.main .contents #conImg.conImg span{
+    width:240px ;
+    height: 170px;
+    background:url("../img/img1.png") ;
+}
+.main .contents #conImg.conImg span{
     position: absolute;
     top:0;
     left:0;
     display: block;
     float: left;
-    width:240px ;
-    height: 170px;
-    background:url("../img/img1.png") ;
-    background-size: 300% 300%;
     z-index: 0;
+    background-size: 300% 300%;
 }
-.main .contents .conImg9 span.img1{
+.main .contents #conImg.conImg9 span.img1{
     background-position :0 0;
     top:0;
     left:0;
 }
 
-.main .contents .conImg9 span.img2{
+.main .contents #conImg.conImg9 span.img2{
     background-position: -240px 0;
     left:240px;
     top:0;
 }
-.main .contents .conImg9 span.img3{
+.main .contents #conImg.conImg9 span.img3{
     background-position: -480px 0;
     left:480px;
     top:0;
 }
-.main .contents .conImg9 span.img4{
+.main .contents #conImg.conImg9 span.img4{
     background-position: 0 -170px;
     top:170px;
     left:0;
 }
-.main .contents .conImg9 span.img5{
+.main .contents #conImg.conImg9 span.img5{
     background-position: -240px -170px;
     top:170px;
     left:240px;
 }
-.main .contents .conImg9 span.img6{
+.main .contents #conImg.conImg9 span.img6{
     background-position: -480px -170px;
     top:170px;
     left:480px;
 }
-.main .contents .conImg9 span.img7{
+.main .contents #conImg.conImg9 span.img7{
     background-position: 0 -340px;
     top: 340px;
     left:0;
 }
-.main .contents .conImg9 span.img8{
+.main .contents #conImg.conImg9 span.img8{
     background-position: -240px -340px;
     top: 340px;
     left:240px;
 }
 
-.main .contents .conImg9 span.pos0{
+.main .contents #conImg.conImg9 span.pos0{
     top:0;
     left:0;
 }
-.main .contents .conImg9 span.pos1{
+.main .contents #conImg.conImg9 span.pos1{
     left:240px;
     top:0;
 }
-.main .contents .conImg9 span.pos2{
+.main .contents #conImg.conImg9 span.pos2{
     left:480px;
     top:0;
 }
-.main .contents .conImg9 span.pos3{
+.main .contents #conImg.conImg9 span.pos3{
     top:170px;
     left:0;
 }
-.main .contents .conImg9 span.pos4{
+.main .contents #conImg.conImg9 span.pos4{
     top:170px;
     left:240px;
 }
-.main .contents .conImg9 span.pos5{
+.main .contents #conImg.conImg9 span.pos5{
     top:170px;
     left:480px;
 }
-.main .contents .conImg9 span.pos6{
+.main .contents #conImg.conImg9 span.pos6{
     top: 340px;
     left:0;
 }
-.main .contents .conImg9 span.pos7{
+.main .contents #conImg.conImg9 span.pos7{
     top: 340px;
     left:240px;
 }
-#pos{
+.main .contents #conImg.conImg9 #pos{
     background: none;
     top: 340px;
     left:480px;

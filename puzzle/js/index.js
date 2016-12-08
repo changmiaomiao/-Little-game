@@ -141,33 +141,37 @@ Drag.prototype.addRange = function (e) {
     }
     this.ele.style.top = valY + "px";
 };
-Drag.prototype.isHit=function (){
-    var pos=document.getElementById("pos");
-    pos.posLeft=pos.offsetLeft;
-    pos.posTop=pos.offsetTop;
-
-    var _true=(this.x+this.ele.offsetWidth==pos.posLeft&&this.y==pos.offsetTop) || (this.y+this.ele.offsetHeight==pos.offsetTop&&this.x==pos.offsetLeft) || (this.x-this.ele.offsetWidth==pos.posLeft&&this.y==pos.offsetTop) || (this.y-this.ele.offsetHeight==pos.offsetTop&&this.x==pos.posLeft)
+Drag.prototype.isHit = function () {
+    var pos = document.getElementById("pos");
+    pos.posLeft = pos.offsetLeft;
+    pos.posTop = pos.offsetTop;
+    var _true = (this.x + this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y + this.ele.offsetHeight == pos.offsetTop && this.x == pos.offsetLeft) || (this.x - this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y - this.ele.offsetHeight == pos.offsetTop && this.x == pos.posLeft)
         ;
-    if(_true){
-        this.ele.style.left=pos.posLeft+"px";
-        this.ele.style.top=pos.posTop+"px";
-        pos.style.left=this.x+"px";
-        pos.style.top=this.y+"px";
+    if (_true) {
+        this.ele.style.left = pos.posLeft + "px";
+        this.ele.style.top = pos.posTop + "px";
+        pos.style.left = this.x + "px";
+        pos.style.top = this.y + "px";
     }
-    else{
-        this.ele.style.left=this.x+"px";
-        this.ele.style.top=this.y+"px";
-    };
+    else {
+        this.ele.style.left = this.x + "px";
+        this.ele.style.top = this.y + "px";
+    }
+    ;
 };
 var render = (function () {
     var conImg = document.getElementById("conImg");
     var sample = document.getElementById("sample");
+    var fileImg = document.getElementById("fileImg");
     var sampleLeft = sample.offsetLeft;
     var sampleTop = sample.offsetTop;
     var sampleRight = sample.clientWidth;
     var sampleBottom = sample.clientHeight;
     var spans = "";
     var arr = [];
+    var spanImg = [];
+    var fileTrue = false;
+    var clickNum = 0;
     function numData(n) {
         n = n ? 9 : n;
         for (var i = 0; i <= (n - 1); i++) {
@@ -187,26 +191,79 @@ var render = (function () {
         for (var i = 0; i < n - 1; i++) {
             spans += "<span class='img" + arr[i] + "'></span>";
         }
-        spans+="<span id='pos'></span>";
+        spans += "<span id='pos'></span>";
         conImg.innerHTML = spans;
-        var spansClass = document.getElementsByTagName("span");
+        var spansClass = conImg.getElementsByTagName("span");
         for (i = n - 2; i >= 0; i--) {
             var span = spansClass[i];
-            span.className += " pos" + i;
+            span.classList[1] = " pos" + i;
+            span.className = span.classList[0] + " " + span.classList[1];
             var spanOn = new Drag(span);
             spanOn.on(span, "start");
-            spanOn.range({left: 0, top: 0, right: sampleRight-span.offsetWidth, bottom: sampleBottom - span.offsetHeight});
-            spanOn.n=n;
+            spanOn.range({
+                left: 0,
+                top: 0,
+                right: sampleRight - span.offsetWidth,
+                bottom: sampleBottom - span.offsetHeight
+            });
+            spanOn.n = n;
+            spanImg.push(span);
         }
         spans = "";
         arr = [];
+    };
+    function showImg(file) {
+        if (!file)return;
+        var name = file.name;
+        var size = Math.floor(file.size / 1024);
+        var type = file.type;
+        if (!/image\//.test(type)) {
+            return false;
+        }
+        if (size > 1000) {
+            return false;
+        }
+        if (typeof  FileReader == "undefined") {
+            alert("该浏览器不支持FileReader接口");
+        } else {
+            var render = new FileReader();
+            render.readAsDataURL(file);
+            render.onload = function () {
+                var _that = this.result;
+                spanImg.map(function (item) {
+                    var positionX = item.style.backgroundPositionX;
+                    var positionY = item.style.backgroundPositionY;
+                    item.style.background = "url(" + _that + ")";
+                    item.style.backgroundSize = "300% 300%";
+                    item.style.backgroundPositionX = positionX;
+                    item.style.backgroundPositionY = positionY;
+
+                });
+            };
+        }
     };
     return {
         init: function () {
             var begin = document.getElementById("begin");
             begin.onclick = function () {
                 window.clearTimeout(time);
-                inn(9);
+                var _file = fileImg.files;
+                if (_file.length) {
+                    if(!this.success){
+                        this.success=true;
+                        window.alert("上传成功");
+                    }
+                    for (var i = 0; i < _file.length; i++) {
+                        showImg(_file[i]);
+                        inn(9);
+                    }
+                }else{
+                    inn(9);
+                }
+
+            };
+            fileImg.onclick = function () {
+
             };
             var time = window.setTimeout(function () {
                 inn(9)
