@@ -171,6 +171,7 @@ var render = (function () {
     var sampleRight = sample.clientWidth;
     var sampleBottom = sample.clientHeight;
     var nIndex=null;
+    var isUrl=null;
     var spans = "";
     var spanImg = [];
     function numData(n) {
@@ -215,6 +216,9 @@ var render = (function () {
         var arr=numData(spansClass.length-1);
         for (i = n - 2; i >= 0; i--) {
             var span = spansClass[i];
+            if(isUrl){
+                span.style.background = "url(" + isUrl + ")";
+            }
             span.style.left=position[arr[i]].left+"px";
             span.style.top=position[arr[i]].top+"px";
             span.style.width=conImgWidth/nSqrt+"px";
@@ -261,12 +265,13 @@ var render = (function () {
             var render = new FileReader();
             render.readAsDataURL(file);
             render.onload = function () {
-                var _that = this.result;
+                isUrl=this.result;
                 spanImg.map(function (item) {
+                    var nSqrt=Math.sqrt(nIndex);
                     var positionX = item.style.backgroundPositionX;
                     var positionY = item.style.backgroundPositionY;
-                    item.style.background = "url(" + _that + ")";
-                    item.style.backgroundSize = "300% 300%";
+                    item.style.background = "url(" + isUrl + ")";
+                    item.style.backgroundSize = nSqrt+"00% "+nSqrt+"00%";
                     item.style.backgroundPositionX = positionX;
                     item.style.backgroundPositionY = positionY;
                 });

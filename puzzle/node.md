@@ -21,3 +21,11 @@ processThis: function processThis(fn, obj) {
 this.y + this.ele.offsetHeight != pos.offsetTop
 
 ```
+- 当上传图片后,会有默认图片出现
+```
+解决问题:将上传的图片地址保存起来,在每次重新排布的时候将得到的url地址设置给图片的背景图片
+```
+### 总结
+```
+代码冗余,没有实现地内聚高耦合;
+```
