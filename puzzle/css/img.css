@@ -100,7 +100,7 @@ img{
     top:0;
     left:0;
     width:240px ;
-    height: 170px;
+    height: 180px;
     display: block;
     float: left;
     z-index: 0;
@@ -123,28 +123,28 @@ img{
     top:0;
 }
 .main .contents #conImg.conImg9 span.img4{
-    background-position: 0 -170px;
-    top:170px;
+    background-position: 0 -180px;
+    top:180px;
     left:0;
 }
 .main .contents #conImg.conImg9 span.img5{
-    background-position: -240px -170px;
-    top:170px;
+    background-position: -240px -180px;
+    top:180px;
     left:240px;
 }
 .main .contents #conImg.conImg9 span.img6{
-    background-position: -480px -170px;
-    top:170px;
+    background-position: -480px -180px;
+    top:180px;
     left:480px;
 }
 .main .contents #conImg.conImg9 span.img7{
-    background-position: 0 -340px;
-    top: 340px;
+    background-position: 0 -360px;
+    top: 360px;
     left:0;
 }
 .main .contents #conImg.conImg9 span.img8{
-    background-position: -240px -340px;
-    top: 340px;
+    background-position: -240px -360px;
+    top: 360px;
     left:240px;
 }
 /*.main .contents #conImg.conImg9 span.pos0{
@@ -160,27 +160,27 @@ img{
     top:0;
 }
 .main .contents #conImg.conImg9 span.pos3{
-    top:170px;
+    top:180px;
     left:0;
 }
 .main .contents #conImg.conImg9 span.pos4{
-    top:170px;
+    top:180px;
     left:240px;
 }
 .main .contents #conImg.conImg9 span.pos5{
-    top:170px;
+    top:180px;
     left:480px;
 }
 .main .contents #conImg.conImg9 span.pos6{
-    top: 340px;
+    top: 360px;
     left:0;
 }
 .main .contents #conImg.conImg9 span.pos7{
-    top: 340px;
+    top: 360px;
     left:240px;
 }*/
 .main .contents #conImg.conImg9 #pos{
     background: none;
-    top: 340px;
+    top: 360px;
     left:480px;
 }
