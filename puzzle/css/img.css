@@ -105,6 +105,7 @@ img{
     float: left;
     z-index: 0;
     background:url("../img/img2.jpg") ;
+    background-size: 300% 300%;
 }
 .main .contents #conImg.conImg9 span.img1{
     background-position :0 0;
