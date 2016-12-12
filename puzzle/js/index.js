@@ -95,10 +95,9 @@ Drag.prototype.down = function (e) {
         this.on(document, "mouseup", this.UP);
     }
     e.preventDefault();
-    console.log("start");
     this.run(e, "star");
     this.on(this.ele, "isHit", this.isHit);
-};
+}
 Drag.prototype.move = function (e) {
     e = e || window.event;
     this.left = this.x + (e.pageX - this.mx);
@@ -149,7 +148,6 @@ Drag.prototype.isHit = function () {
     pos.posLeft = pos.offsetLeft;
     pos.posTop = pos.offsetTop;
     var _true = (this.x + this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y + this.ele.offsetHeight == pos.offsetTop && this.x == pos.offsetLeft) || (this.x - this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y - this.ele.offsetHeight == pos.offsetTop && this.x == pos.posLeft);
-    console.log(_true);
     if (_true) {
         this.ele.style.left = pos.posLeft + "px";
         this.ele.style.top = pos.posTop + "px";
@@ -234,7 +232,6 @@ var render = (function () {
             span.style.backgroundSize=nSqrt+"00% "+nSqrt+"00%";
             span.style.backgroundPosition="-"+position[arr[i]].left+"px -"+position[arr[i]].top+"px";
             var spanOn = new Drag(span);
-            console.log(spanOn);
             spanOn.on(span, "start");
             spanOn.range({
                 left: 0,
