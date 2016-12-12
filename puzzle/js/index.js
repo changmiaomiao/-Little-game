@@ -4,7 +4,7 @@ var fn = {
     },
     processThis: function processThis(fn, obj) {
         return function (e) {
-            fn.call(obj);
+            fn.call(obj,e);
         }
     }
 };
@@ -95,6 +95,7 @@ Drag.prototype.down = function (e) {
         this.on(document, "mouseup", this.UP);
     }
     e.preventDefault();
+    console.log("start");
     this.run(e, "star");
     this.on(this.ele, "isHit", this.isHit);
 };
@@ -108,6 +109,7 @@ Drag.prototype.move = function (e) {
     this.run(e, "resetMove");
 };
 Drag.prototype.up = function (e) {
+    e=e||window.event;
     this.ele.style.zIndex = 0;
     if (this.ele.releaseCapture) {
         this.ele.releaseCapture();
@@ -125,6 +127,7 @@ Drag.prototype.range = function (oRange) {
     this.on(this.ele, "resetMove", this.addRange);
 };
 Drag.prototype.addRange = function (e) {
+    e=e||window.event;
     var oRange = this.oRange;
     var valX = this.left;
     var valY = this.top;
@@ -145,8 +148,8 @@ Drag.prototype.isHit = function () {
     var pos = document.getElementById("pos");
     pos.posLeft = pos.offsetLeft;
     pos.posTop = pos.offsetTop;
-    var _true = (this.x + this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y + this.ele.offsetHeight == pos.offsetTop && this.x == pos.offsetLeft) || (this.x - this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y - this.ele.offsetHeight == pos.offsetTop && this.x == pos.posLeft)
-        ;
+    var _true = (this.x + this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y + this.ele.offsetHeight == pos.offsetTop && this.x == pos.offsetLeft) || (this.x - this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y - this.ele.offsetHeight == pos.offsetTop && this.x == pos.posLeft);
+    console.log(_true);
     if (_true) {
         this.ele.style.left = pos.posLeft + "px";
         this.ele.style.top = pos.posTop + "px";
@@ -156,26 +159,26 @@ Drag.prototype.isHit = function () {
     else {
         this.ele.style.left = this.x + "px";
         this.ele.style.top = this.y + "px";
-    }
-    ;
+    };
 };
 var render = (function () {
-    var conImg = document.getElementById("conImg");
+    var conImg = document.getElementById("conImg"),
+        conImgWidth=conImg.clientWidth,
+        conImgHeight=conImg.clientHeight;
     var sample = document.getElementById("sample");
+    var select = document.getElementById("select");
+    var selects = document.getElementById("selects");
+    var selectsP = document.getElementsByClassName("selects-p");
     var fileImg = document.getElementById("fileImg");
-    var sampleLeft = sample.offsetLeft;
-    var sampleTop = sample.offsetTop;
     var sampleRight = sample.clientWidth;
     var sampleBottom = sample.clientHeight;
+    var nIndex=null;
     var spans = "";
-    var arr = [];
     var spanImg = [];
-    var fileTrue = false;
-    var clickNum = 0;
     function numData(n) {
-        n = n ? 9 : n;
-        for (var i = 0; i <= (n - 1); i++) {
-            var num = fn.ran(1, n - 1);
+        var arr = [];
+        for (var i = 0; i <=n ; i++) {
+            var num = fn.ran(0, n - 1);
             var boo = arr.filter(function (index) {
                 return index == num;
             });
@@ -184,21 +187,54 @@ var render = (function () {
             }
             i = arr.length;
         }
+        return arr;
     };
     function inn(n) {
-        n = n ? 9 : n;
-        numData(n);
+        n = n ? n :9;
+        nIndex=n;
+        var nSqrt=Math.sqrt(n);
+        var num=0;
+        var position=[];
         for (var i = 0; i < n - 1; i++) {
-            spans += "<span class='img" + arr[i] + "'></span>";
+            spans += "<span></span>";
         }
         spans += "<span id='pos'></span>";
         conImg.innerHTML = spans;
         var spansClass = conImg.getElementsByTagName("span");
+        var pos = document.getElementById("pos");
+        for (var j=0;j<=nSqrt;j++){
+            if(j==nSqrt){
+                if(num==nSqrt-1){
+                    continue;
+                }
+                num++;
+                j=-1;
+            }else{
+                position.push({left:j*(conImgWidth/nSqrt),top:num*(conImgHeight/nSqrt)});
+
+            }
+        };
+        var arr=numData(spansClass.length-1);
         for (i = n - 2; i >= 0; i--) {
             var span = spansClass[i];
-            span.classList[1] = " pos" + i;
-            span.className = span.classList[0] + " " + span.classList[1];
+            span.style.left=position[arr[i]].left+"px";
+            span.style.top=position[arr[i]].top+"px";
+            span.style.width=conImgWidth/nSqrt+"px";
+            span.style.height=conImgHeight/nSqrt+"px";
+        }
+        pos.style.width=conImgWidth/nSqrt+"px";
+        pos.style.height=conImgHeight/nSqrt+"px";
+        pos.style.left="auto";
+        pos.style.top="auto";
+        pos.style.bottom="0";
+        pos.style.right="0";
+        arr=numData(spansClass.length-1);
+        for (i = n - 2; i >= 0; i--) {
+           span = spansClass[i];
+            span.style.backgroundSize=nSqrt+"00% "+nSqrt+"00%";
+            span.style.backgroundPosition="-"+position[arr[i]].left+"px -"+position[arr[i]].top+"px";
             var spanOn = new Drag(span);
+            console.log(spanOn);
             spanOn.on(span, "start");
             spanOn.range({
                 left: 0,
@@ -214,7 +250,6 @@ var render = (function () {
     };
     function showImg(file) {
         if (!file)return;
-        var name = file.name;
         var size = Math.floor(file.size / 1024);
         var type = file.type;
         if (!/image\//.test(type)) {
@@ -237,7 +272,6 @@ var render = (function () {
                     item.style.backgroundSize = "300% 300%";
                     item.style.backgroundPositionX = positionX;
                     item.style.backgroundPositionY = positionY;
-
                 });
             };
         }
@@ -255,16 +289,34 @@ var render = (function () {
                     }
                     for (var i = 0; i < _file.length; i++) {
                         showImg(_file[i]);
-                        inn(9);
+                        if(nIndex){inn(nIndex);}else(inn(9));
                     }
                 }else{
-                    inn(9);
+                    if(nIndex){inn(nIndex);}else(inn(9));
+
                 }
 
             };
-            fileImg.onclick = function () {
-
+            select.onclick=function (){
+                selects.style.display="block";
             };
+            for(var i=0;i<selectsP.length;i++){
+                selectsP[i].onclick=function(){
+                    var diff=this.innerHTML;
+                    if(diff=="简单"){
+                        inn(9);
+
+                    }else if(diff=="一般"){
+                        inn(16);
+                        select.innerHTML=diff;
+                    }else if(diff=="困难"){
+                        inn(25);
+                        select.innerHTML=diff;
+                    };
+                    selects.style.display="none";
+                };
+            }
+
             var time = window.setTimeout(function () {
                 inn(9)
             }, 1000);

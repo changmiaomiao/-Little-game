@@ -38,20 +38,32 @@ img{
     height: 36px;
 }
 .main .list li{
+    position: relative;
     float:left;
     color: white;
     width: 25%;
     height: 36px;
     line-height: 36px;
     text-align: center;
+    cursor: pointer;
     background-color: palevioletred;
 }
 .main .list li a{
+    /*position: relative;*/
     color: white;
 }
-.main .list li a .select{
+
+.main .list li .selects{
+    position: absolute;
+    width: 190px;
+    z-index: 11;
     display: none;
     background-color: palevioletred;
+}
+.main .list li a:hover .select-left{
+    display: block;
+    right:0;
+    width: 200px;
 }
 .main .list li.input{
     position: relative;
@@ -77,25 +89,22 @@ img{
     margin: 20px 20px;
     float: left;
     width: 720px;
-    height: 510px;
+    height: 540px;
 }
-.main .contents .sample img{
-    width: 100%;
+.main .contents .sample .conImg{
     height: 100%;
-}
-.main .contents #conImg.conImg span{
-    width:240px ;
-    height: 170px;
-    background:url("../img/img1.png") ;
+    background-color: papayawhip;
 }
 .main .contents #conImg.conImg span{
     position: absolute;
     top:0;
     left:0;
+    width:240px ;
+    height: 170px;
     display: block;
     float: left;
     z-index: 0;
-    background-size: 300% 300%;
+    background:url("../img/img1.png") ;
 }
 .main .contents #conImg.conImg9 span.img1{
     background-position :0 0;
@@ -138,8 +147,7 @@ img{
     top: 340px;
     left:240px;
 }
-
-.main .contents #conImg.conImg9 span.pos0{
+/*.main .contents #conImg.conImg9 span.pos0{
     top:0;
     left:0;
 }
@@ -170,7 +178,7 @@ img{
 .main .contents #conImg.conImg9 span.pos7{
     top: 340px;
     left:240px;
-}
+}*/
 .main .contents #conImg.conImg9 #pos{
     background: none;
     top: 340px;
