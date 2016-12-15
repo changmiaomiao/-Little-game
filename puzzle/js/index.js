@@ -195,14 +195,13 @@ var render = (function () {
             var _top= Math.abs(parseFloat(item.style.top));
             var _X= Math.abs(parseFloat(item.style.backgroundPositionX));
             var _Y= Math.abs(parseFloat(item.style.backgroundPositionY));
-            if(_left===_X&&_top===_Y){
+            if(_left!=_X||_top!=_Y){
                 return item;
             }
         });
-        if(_true.length==8){
+        if(_true.length==0){
             window.alert("拼图成功");
         }
-
     };
     function inn(n) {
         n = n ? n :9;

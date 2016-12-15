@@ -21,6 +21,13 @@ processThis: function processThis(fn, obj) {
 this.y + this.ele.offsetHeight != pos.offsetTop
 
 ```
+ - 1.bug:拼好之后没有提示拼图成功
+
+ ```
+ 解决方法:循环判断每个
+ ```
+
+ - 2.bug:上传图片成功后,快速点击开始,会闪出原来图片的图案
 - 当上传图片后,会有默认图片出现
 ```
 解决问题:将上传的图片地址保存起来,在每次重新排布的时候将得到的url地址设置给图片的背景图片
