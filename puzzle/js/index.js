@@ -24,7 +24,6 @@ BindEvent.prototype.on = function (ele, type, fn) {
         }
     }
     a.push(fn);
-
 };
 BindEvent.prototype.run = function (e, type) {
     e = e || window.event;
@@ -75,6 +74,7 @@ function Drag(ele) {
     this.MOVE = fn.processThis(this.move, this);
     this.UP = fn.processThis(this.up, this);
     this.on(this.ele, "mousedown", this.DOWN);
+    var spans=[];
 };
 Drag.prototype.__proto__ = BindEvent.prototype;
 Drag.prototype.down = function (e) {
@@ -97,7 +97,7 @@ Drag.prototype.down = function (e) {
     e.preventDefault();
     this.run(e, "star");
     this.on(this.ele, "isHit", this.isHit);
-}
+};
 Drag.prototype.move = function (e) {
     e = e || window.event;
     this.left = this.x + (e.pageX - this.mx);
@@ -143,7 +143,7 @@ Drag.prototype.addRange = function (e) {
     }
     this.ele.style.top = valY + "px";
 };
-Drag.prototype.isHit = function () {
+Drag.prototype.isHit = function (e) {
     var pos = document.getElementById("pos");
     pos.posLeft = pos.offsetLeft;
     pos.posTop = pos.offsetTop;
@@ -158,6 +158,7 @@ Drag.prototype.isHit = function () {
         this.ele.style.left = this.x + "px";
         this.ele.style.top = this.y + "px";
     };
+    this.run(e,"aSuccess");
 };
 var render = (function () {
     var conImg = document.getElementById("conImg"),
@@ -188,6 +189,21 @@ var render = (function () {
         }
         return arr;
     };
+    function aSuccess(){
+        var _true=spanImg.filter(function(item){
+            var _left= Math.abs(parseFloat(item.style.left));
+            var _top= Math.abs(parseFloat(item.style.top));
+            var _X= Math.abs(parseFloat(item.style.backgroundPositionX));
+            var _Y= Math.abs(parseFloat(item.style.backgroundPositionY));
+            if(_left===_X&&_top===_Y){
+                return item;
+            }
+        });
+        if(_true.length==8){
+            window.alert("拼图成功");
+        }
+
+    };
     function inn(n) {
         n = n ? n :9;
         nIndex=n;
@@ -210,7 +226,6 @@ var render = (function () {
                 j=-1;
             }else{
                 position.push({left:j*(conImgWidth/nSqrt),top:num*(conImgHeight/nSqrt)});
-
             }
         };
         var arr=numData(spansClass.length-1);
@@ -245,6 +260,7 @@ var render = (function () {
             });
             spanOn.n = n;
             spanImg.push(span);
+            spanOn.on(span,"aSuccess",aSuccess);
         }
         spans = "";
         arr = [];
@@ -295,7 +311,6 @@ var render = (function () {
                     }
                 }else{
                     if(nIndex){inn(nIndex);}else(inn(9));
-
                 }
 
             };
@@ -307,7 +322,6 @@ var render = (function () {
                     var diff=this.innerHTML;
                     if(diff=="简单"){
                         inn(9);
-
                     }else if(diff=="一般"){
                         inn(16);
                         select.innerHTML=diff;
@@ -318,7 +332,6 @@ var render = (function () {
                     selects.style.display="none";
                 };
             }
-
             var time = window.setTimeout(function () {
                 inn(9)
             }, 1000);
