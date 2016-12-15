@@ -169,6 +169,7 @@ var render = (function () {
     var selects = document.getElementById("selects");
     var selectsP = document.getElementsByClassName("selects-p");
     var fileImg = document.getElementById("fileImg");
+    var prompt = document.getElementById("prompt");
     var sampleRight = sample.clientWidth;
     var sampleBottom = sample.clientHeight;
     var nIndex=null;
@@ -200,9 +201,18 @@ var render = (function () {
             }
         });
         if(_true.length==0){
-            window.alert("拼图成功");
+            prompt.innerHTML="拼图成功";
+            promptO();
         }
     };
+    function promptO(){
+        prompt.style.opacity="1";
+        prompt.style.zIndex=10;
+        window.setTimeout(function(){
+            prompt.style.opacity=0;
+            prompt.style.zIndex=0;
+        },3000);
+    }
     function inn(n) {
         n = n ? n :9;
         nIndex=n;
@@ -302,7 +312,8 @@ var render = (function () {
                 if (_file.length) {
                     if(!this.success){
                         this.success=true;
-                        window.alert("上传成功");
+                        prompt.innerHTML="上传成功";
+                        promptO();
                     }
                     for (var i = 0; i < _file.length; i++) {
                         showImg(_file[i]);
