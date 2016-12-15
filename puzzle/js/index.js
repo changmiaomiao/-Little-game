@@ -147,7 +147,7 @@ Drag.prototype.isHit = function (e) {
     var pos = document.getElementById("pos");
     pos.posLeft = pos.offsetLeft;
     pos.posTop = pos.offsetTop;
-    var _true = (this.x + this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y + this.ele.offsetHeight == pos.offsetTop && this.x == pos.offsetLeft) || (this.x - this.ele.offsetWidth == pos.posLeft && this.y == pos.offsetTop) || (this.y - this.ele.offsetHeight == pos.offsetTop && this.x == pos.posLeft);
+    var _true=(Math.abs(this.x + this.ele.offsetWidth - pos.posLeft)<5 && Math.abs(this.y - pos.offsetTop)<5)||(Math.abs(this.y + this.ele.offsetHeight- pos.offsetTop)<5 && Math.abs(this.x -pos.offsetLeft)<5)||(Math.abs(this.x - this.ele.offsetWidth - pos.posLeft)<5 && Math.abs(this.y - pos.offsetTop)<5)||(Math.abs(this.y - this.ele.offsetHeight- pos.offsetTop)<5 && Math.abs(this.x -pos.offsetLeft)<5);
     if (_true) {
         this.ele.style.left = pos.posLeft + "px";
         this.ele.style.top = pos.posTop + "px";

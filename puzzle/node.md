@@ -19,7 +19,11 @@ processThis: function processThis(fn, obj) {
 第三排距离上面的top值为255;
 128+127.5=255.5不等于255;
 this.y + this.ele.offsetHeight != pos.offsetTop
-
+```
+> - 方法2
+```
+Math.abs(this.x + this.ele.offsetWidth - pos.posLeft)<5 && Math.abs(this.y - pos.offsetTop)<5)
+因为宽度获得的数据不一定是一个整数,所以将两者相差为一个范围,更方便简单;
 ```
  - bug:拼好之后没有提示拼图成功
 
