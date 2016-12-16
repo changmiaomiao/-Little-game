@@ -8,8 +8,7 @@ var fn = {
         }
     }
 };
-function BindEvent() {
-}
+function BindEvent() {}
 BindEvent.prototype.on = function (ele, type, fn) {
     if (ele.addEventListener) {
         ele.addEventListener(type, fn, false);
@@ -206,11 +205,9 @@ var render = (function () {
         }
     };
     function promptO(){
-        prompt.style.opacity="1";
-        prompt.style.zIndex=10;
+        prompt.style.lineHeight="40px";
         window.setTimeout(function(){
-            prompt.style.opacity=0;
-            prompt.style.zIndex=0;
+            prompt.style.lineHeight=0;
         },3000);
     }
     function inn(n) {
@@ -326,6 +323,24 @@ var render = (function () {
             };
             select.onclick=function (){
                 selects.style.display="block";
+            };
+            conImg.ondragenter=function (){
+                prompt.innerHTML="放开我";
+                promptO();
+            };
+            conImg.ondragover=function (e){
+                e.preventDefault();
+            };
+            conImg.ondrop=function (e){
+                prompt.innerHTML="变脸给你看!";
+                promptO();
+                e.preventDefault();
+                var _file=e.dataTransfer.files;
+                console.log(_file);
+                for (var i = 0; i < _file.length; i++) {
+                    showImg(_file[i]);
+                    if(nIndex){inn(nIndex);}else(inn(9));
+                }
             };
             for(var i=0;i<selectsP.length;i++){
                 selectsP[i].onclick=function(){

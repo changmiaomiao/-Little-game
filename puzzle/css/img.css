@@ -33,17 +33,16 @@ img{
     background-color: white;
 }
 .prompt{
-    position: absolute;
-    left: 303px;
-    top:0;
+    /*position: absolute;*/
+    /*left: 303px;*/
+    /*top:0;*/
     width:760px ;
     margin: 0 auto;
     background:linear-gradient(to top,#f2dede,#f3b4c7);
     font-size: 32px;
-    line-height: 40px;
     text-align: center;
     /*z-index: 10;*/
-    opacity: 0;
+    /*opacity: 0;*/
 }
 .main .list{
     float: left;
