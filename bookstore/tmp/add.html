@@ -1,26 +1,32 @@
-<!--增加图书的书名 价格 书的封皮-->
-<form class="form-horizontal">
+<!--增加书本-->
+<div class="form-horizontal">
     <div class="form-group">
-        <label for="bookName" class="control-label col-md-2">书的名称</label>
+        <label for="bookName" class="control-label col-md-2">
+            书店名称
+        </label>
         <div class="col-md-10">
             <input type="text" id="bookName" class="form-control" placeholder="请输入书的名称" ng-model="book.name">
         </div>
     </div>
     <div class="form-group">
-        <label for="bookCover" class="control-label col-md-2">书的封面</label>
+        <label for="bookCover" class="control-label col-md-2">
+            书店封皮
+        </label>
         <div class="col-md-10">
-            <input type="text" id="bookCover" class="form-control" placeholder="请输入书的封面地址" ng-model="book.cover">
+            <input type="text" id="bookCover" class="form-control" placeholder="请输入书的封皮地址" ng-model="book.cover">
         </div>
     </div>
     <div class="form-group">
-        <label for="bookPrice" class="control-label col-md-2">书的价格</label>
+        <label for="bookPrice" class="control-label col-md-2">
+            书店价格
+        </label>
         <div class="col-md-10">
             <input type="text" id="bookPrice" class="form-control" placeholder="请输入书的价格" ng-model="book.price">
         </div>
     </div>
     <div class="form-group">
-        <div class=" col-md-offset-2 col-md-10">
+        <diV class="col-md-offset-2 col-md-10">
             <button type="button" class="btn btn-success" ng-click="submit()">提交</button>
-        </div>
+        </diV>
     </div>
-</form>
+</div>

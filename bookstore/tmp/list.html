@@ -1,40 +1,17 @@
-<!--列表页面-->
-<!--使用bootstrap 的panel组件-->
-<!--<div class="row">-->
+<!--书店列表-->
 <style>
     img{
-        width:230px ;
+        width:230px;
         height: 256px;
     }
 </style>
 <div class="panel panel-primary col-md-3 col-md-offset-1" ng-repeat="book in books track by $index">
-    <div class="panel-heading ">{{book.name}}</div>
+    <div class="panel-heading">{{book.name}}</div>
     <div class="panel-body">
         <img ng-src="{{book.cover}}" alt="">
     </div>
     <div class="panel-footer">
-        价格:{{book.price|currency:"£"}}
+        价格:{{book.price|currency:"$"}}
         <button ng-click="goDetail(book.id)">查看详情</button>
     </div>
 </div>
-<!--<div class="panel panel-primary col-md-3 col-md-offset-1">
-    <div class="panel-heading ">javascript</div>
-    <div class="panel-body">
-        <img src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/TB17LHCOXXXXXcqXXXXXXXXXXXX_!!0-item_pic.jpg_230x230.jpg" alt="">
-    </div>
-    <div class="panel-footer">
-        价格
-        <button>查看详情</button>
-    </div>
-</div>
-<div class="panel panel-primary col-md-3 col-md-offset-1">
-    <div class="panel-heading ">javascript</div>
-    <div class="panel-body">
-        <img src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/TB17LHCOXXXXXcqXXXXXXXXXXXX_!!0-item_pic.jpg_230x230.jpg" alt="">
-    </div>
-    <div class="panel-footer">
-        价格
-        <button class="">查看详情</button>
-    </div>
-</div>-->
-<!--</div>-->
